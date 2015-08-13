@@ -1,4 +1,3 @@
-/*! angular-fcsa-number (version 1.5.3) 2014-10-17 */
 (function() {
   var fcsaNumberModule,
     __hasProp = {}.hasOwnProperty;
@@ -9,19 +8,6 @@
     'fcsaNumberConfig', function(fcsaNumberConfig) {
       var addCommasToInteger, controlKeys, defaultOptions, getOptions, hasMultipleDecimals, isNotControlKey, isNotDigit, isNumber, makeIsValid, makeMaxDecimals, makeMaxDigits, makeMaxNumber, makeMinNumber;
       defaultOptions = fcsaNumberConfig.defaultOptions;
-      getOptions = function(scope) {
-        var option, options, value, _ref;
-        options = angular.copy(defaultOptions);
-        if (scope.options != null) {
-          _ref = scope.$eval(scope.options);
-          for (option in _ref) {
-            if (!__hasProp.call(_ref, option)) continue;
-            value = _ref[option];
-            options[option] = value;
-          }
-        }
-        return options;
-      };
       isNumber = function(val) {
         return !isNaN(parseFloat(val)) && isFinite(val);
       };
@@ -107,11 +93,11 @@
         restrict: 'A',
         require: 'ngModel',
         scope: {
-          options: '@fcsaNumber'
+          options: '=fcsaNumber'
         },
         link: function(scope, elem, attrs, ngModelCtrl) {
           var isValid, options;
-          options = getOptions(scope);
+          options = scope.options;
           isValid = makeIsValid(options);
           ngModelCtrl.$parsers.unshift(function(viewVal) {
             var noCommasVal;
